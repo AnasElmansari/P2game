@@ -13,8 +13,9 @@ export default class MainGameScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("open_tileset", "assets/Tilemap/open_tileset.png");
-    this.load.tilemapTiledJSON("trialMap", "assets/Tilemap/city.json");
+    this.load.image("open_tileset stor", "assets/Tilemap/open_tileset.png");
+    this.load.image("biler-2 - mindre", "assets/Tilemap/biler-2.png");
+    this.load.tilemapTiledJSON("trialMap", "assets/Tilemap/Zombie.json");
     this.load.spritesheet("player", "assets/TestPlayer.png", {
       frameWidth: 64,
       frameHeight: 64,
@@ -35,37 +36,33 @@ export default class MainGameScene extends Phaser.Scene {
     const map = this.make.tilemap({ key: "trialMap" });
 
     // Add the tileset image to the tilemap
-    const tileset = map.addTilesetImage("open_tileset", "open_tileset");
+    const tileset = map.addTilesetImage("open_tileset stor", "open_tileset stor");
+    const tileset2 = map.addTilesetImage("biler-2 - mindre", "biler-2 - mindre");
 
     // Create the layers from the tilemap
-    const groundLayer = map.createLayer('ground', tileset, 0, 0);
-    const treea01Layer = map.createLayer('trees 01', tileset, 0, 0);
-    const streetsLayer = map.createLayer('streets', tileset, 0, 0);
-    const sidewalksLayer = map.createLayer('sidewalks', tileset, 0, 0);
-    const buildingLayer = map.createLayer('building', tileset, 0, 0);
-    const walkthrough = map.createLayer('walk through', tileset, 0, 0);
-    const boxLayer = map.createLayer('boxes', tileset, 0, 0);
-    const fencesLayer = map.createLayer('fences', tileset, 0, 0);
+    const GroundLayer = map.createLayer('Ground', tileset, 0, 0);
+    const MedicalLayer = map.createLayer('Medical', tileset, 0, 0);
+    const CarsLayer =  map.createLayer('Cars', tileset2, 0, 0);
 
     
-    this.walkthrough = walkthrough;
+    // this.walkthrough = walkthrough;
 
-    fencesLayer.setCollisionByExclusion([-1]);
-    buildingLayer.setCollisionByExclusion([-1]);
-    boxLayer.setCollisionByExclusion([-1]);
-    treea01Layer.setCollisionByExclusion([-1]);
+    // fencesLayer.setCollisionByExclusion([-1]);
+    // buildingLayer.setCollisionByExclusion([-1]);
+    // boxLayer.setCollisionByExclusion([-1]);
+    // treea01Layer.setCollisionByExclusion([-1]);
 
     // Create the player
     this.player = new Player(this, 800, 700, "player");
 
-    this.physics.add.collider(this.player, fencesLayer);
-    this.physics.add.collider(this.player, buildingLayer);
-    this.physics.add.collider(this.player, boxLayer);
-    this.physics.add.collider(this.player, treea01Layer);
-    this.physics.add.collider(this.zombies, fencesLayer);
-    this.physics.add.collider(this.zombies, buildingLayer);
-    this.physics.add.collider(this.zombies, boxLayer);
-    this.physics.add.collider(this.zombies, treea01Layer);
+    // this.physics.add.collider(this.player, fencesLayer);
+    // this.physics.add.collider(this.player, buildingLayer);
+    // this.physics.add.collider(this.player, boxLayer);
+    // this.physics.add.collider(this.player, treea01Layer);
+    // this.physics.add.collider(this.zombies, fencesLayer);
+    // this.physics.add.collider(this.zombies, buildingLayer);
+    // this.physics.add.collider(this.zombies, boxLayer);
+    // this.physics.add.collider(this.zombies, treea01Layer);
 
     // Adds collidition between the zombies and the player
     this.physics.add.collider(this.player, this.zombies);
@@ -176,15 +173,15 @@ export default class MainGameScene extends Phaser.Scene {
         this.overlapTimer.remove();
         this.overlapTimer = null;
       }
-    }
-    const playerTile = this.walkthrough.worldToTileXY(this.player.x, this.player.y);
-    const tile = this.walkthrough.getTileAt(playerTile.x, playerTile.y);
+     }
+    // const playerTile = this.walkthrough.worldToTileXY(this.player.x, this.player.y);
+    // const tile = this.walkthrough.getTileAt(playerTile.x, playerTile.y);
     
-    if (tile) {
-      this.walkthrough.setAlpha(0.5); 
-    } else {
-      this.walkthrough.setAlpha(1); 
-    }
+    // if (tile) {
+    //   this.walkthrough.setAlpha(0.5); 
+    // } else {
+    //   this.walkthrough.setAlpha(1); 
+    // }
     
   }
 
